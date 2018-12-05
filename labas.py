@@ -15,7 +15,7 @@ wn.bgcolor("green")
 wn.setup(width=600, height=600)
 wn.tracer(0)  # Turns off the screen updates
 
-# Snake head
+c Snake head
 head = turtle.Turtle()
 head.speed(0)
 head.shape("square")
