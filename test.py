@@ -7,6 +7,7 @@ win = pygame.display.set_mode((700, 700))
 pygame.display.set_caption("Falling Blocks")
 
 enemyX = randint(0,700)
+fallingSpeed = 1
 x = 350
 y = 660
 width = 30
@@ -30,7 +31,8 @@ while run:
 
     win.fill((0,0,0))
     pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
-    pygame.draw.ellipse(win, (255, 0, 110), (enemyX, 0, width, height))
+    pygame.draw.ellipse(win, (255, 0, 110), (enemyX, fallingSpeed, width, height))
+    fallingSpeed = fallingSpeed + 2
 
     pygame.display.update()
 pygame.quit()
