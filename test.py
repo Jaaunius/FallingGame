@@ -1,19 +1,38 @@
 import pygame
 from random import randint
+
 pygame.init()
 
-win = pygame.display.set_mode((700, 700))
+white = (255, 255, 255)
+black = (0, 0, 0)
+red = (255, 0, 0)
+green = (0, 155, 0)
 
-pygame.display.set_caption("Falling Blocks")
+display_width = 800
+display_height = 600
 
-enemyX = randint(0,700)
-fallingSpeed = 1
-x = 350
-y = 660
-width = 30
-height = 30
+block_size = 50
+
 vel = 15
-win.fill((0,0,0))
+
+snakeX = 500
+snakeY = 500
+
+enemyX = randint(0, 800)
+enemyY = []
+
+win = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption('Falling Game')
+
+
+def snake(block_size):
+    pygame.draw.rect(win, green, [snakeX, snakeY, block_size, block_size])
+
+
+def enemy():
+    pygame.draw.ellipse(win, red, [enemyX, enemyY, 15, 15])
+
+
 run = True
 while run:
     pygame.time.delay(30)
@@ -22,17 +41,18 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
+    # for e in enemyX:
+
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_LEFT] and x > vel:
-        x -= vel
-    if keys[pygame.K_RIGHT] and x < 700 - width - vel:
-        x += vel
+    if keys[pygame.K_LEFT]:
+        snakeX -= vel
+    if keys[pygame.K_RIGHT]:
+        snakeX += vel
 
-    win.fill((0,0,0))
-    pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
-    pygame.draw.ellipse(win, (255, 0, 110), (enemyX, fallingSpeed, width, height))
-    fallingSpeed = fallingSpeed + 2
+    win.fill(black)
+    snake(10)
+    enemy()
 
     pygame.display.update()
 pygame.quit()
