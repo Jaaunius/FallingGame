@@ -11,27 +11,30 @@ green = (0, 155, 0)
 display_width = 800
 display_height = 600
 
-block_size = 50
-
 vel = 15
+
+enemyX = [0] * 5
+enemyY = [0] * 5
+
+index = 0
 
 snakeX = 500
 snakeY = 500
 
-enemyX = randint(0, 800)
-enemyY = []
+enemyX[0] = randint(0, 800)
+enemyY[0] = 50
 
 win = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('Falling Game')
 
+def player(block_size):
+    pygame.draw.rect(win, white, [snakeX, snakeY, block_size, block_size])
 
-def snake(block_size):
-    pygame.draw.rect(win, green, [snakeX, snakeY, block_size, block_size])
+def enemy(block_size,x,y):
+    pygame.draw.ellipse(win, red, [x, y, block_size, block_size])
 
-
-def enemy():
-    pygame.draw.ellipse(win, red, [enemyX, enemyY, 15, 15])
-
+def enemyLower():
+    enemyY[0] += 5
 
 run = True
 while run:
@@ -41,8 +44,6 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
-    # for e in enemyX:
-
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_LEFT]:
@@ -51,8 +52,10 @@ while run:
         snakeX += vel
 
     win.fill(black)
-    snake(10)
-    enemy()
+
+    player(40)
+    enemy(30,500,300)
+    enemyLower()
 
     pygame.display.update()
 pygame.quit()
